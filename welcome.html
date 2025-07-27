@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6a0dad, #4b0082); /* Smooth gradient */
+            color: #ffffff;
+        }
+
+        /* Main container for centering content */
+        .container {
+            text-align: center;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: #ffffff; /* White background for contrast */
+            max-width: 500px;
+            width: 90%;
+        }
+
+        /* Welcome title styling */
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #6a0dad; /* Purple title */
+        }
+
+        /* Subtitle */
+        p {
+            font-size: 1.2rem;
+            color: #555555; /* Subtle dark gray for text */
+            margin-bottom: 30px;
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            font-size: 1rem;
+            color: #ffffff;
+            background-color: #6a0dad;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(106, 13, 173, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #5a0bb3; /* Slightly darker shade on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(90, 11, 179, 0.4);
+        }
+
+        .btn:active {
+            background-color: #4b0082; /* Darker shade on click */
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(75, 0, 130, 0.3);
+        }
+
+        /* Optional responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to SSN Event Management System</h1>
+        <p>Your one-stop platform for managing all your events effortlessly.</p>
+        <a href="{{ url_for('login') }}" class="btn">Login</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="path/to/your/styles.css"> <!-- Link your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+        .button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .add-button {
+            background-color: #28a745; /* Green for Add */
+        }
+        .view-button {
+            background-color: #007bff; /* Blue for View */
+        }
+        .edit-button {
+            background-color: #ffc107; /* Yellow for Edit */
+        }
+        .delete-button {
+            background-color: #dc3545; /* Red for Delete */
+            color: #fff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Events</h1>
+    <a href="{{ url_for('add_event') }}" class="button add-button">Add New Event</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.event_name }}</td>
+                <td>{{ event.event_date }}</td>
+                <td>{{ event.event_location }}</td>
+                <td>{{ event.event_description }}</td>
+                <td>
+                    <a href="{{ url_for('event_details', event_id=event.event_id) }}" class="button view-button">View</a>
+                    <a href="{{ url_for('edit_event', event_id=event.event_id) }}" class="button edit-button">Edit</a>
+                    <form action="{{ url_for('delete_event', event_id=event.event_id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="button delete-button">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Form container styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        /* Input field styling */
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Input field focus styling */
+        input[type="text"]:focus,
+        input[type="date"]:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(110, 142, 251, 0.5);
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* Button styling */
+        button {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            color: #fff;
+            background-color: #6e8efb;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 15px;
+        }
+
+        /* Hover effects for the button */
+        button:hover {
+            background-color: #5a75d4;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            form {
+                padding: 20px;
+            }
+
+            input[type="text"], input[type="date"], button {
+                font-size: 1em;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Event</h1>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Event Name" required>
+        <input type="date" name="date" placeholder="Event Date" required>
+        <input type="text" name="location" placeholder="Event Location" required>
+        <input type="text" name="description" placeholder="Event Description">
+        <button type="submit">Add Event</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button container styling */
+        div {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Button styling */
+        button {
+            padding: 12px 24px;
+            font-size: 1.1em;
+            color: #fff;
+            background-color: #6e8efb;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hover effects for buttons */
+        button:hover {
+            background-color: #5a75d4;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Button focus styling */
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(110, 142, 251, 0.5);
+        }
+
+        /* Link styling to make buttons clickable */
+        a {
+            text-decoration: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Event Management Dashboard</h1>
+    <div>
+        <a href="{{ url_for('add_event') }}"><button>Add Event</button></a>
+        <a href="{{ url_for('events') }}"><button>View Events</button></a>
+    </div>
+</body>
+</html>

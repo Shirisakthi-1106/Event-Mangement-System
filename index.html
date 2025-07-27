@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Add Event</h1>
+        <form method="POST" action="/add_event" class="mt-4">
+            <div class="form-group">
+                <label for="event_name">Event Name</label>
+                <input type="text" name="event_name" class="form-control" id="event_name" placeholder="Enter event name" required>
+            </div>
+            <div class="form-group">
+                <label for="event_date">Event Date</label>
+                <input type="date" name="event_date" class="form-control" id="event_date" required>
+            </div>
+            <div class="form-group">
+                <label for="event_location">Event Location</label>
+                <input type="text" name="event_location" class="form-control" id="event_location" placeholder="Enter event location" required>
+            </div>
+            <div class="form-group">
+                <label for="event_description">Event Description</label>
+                <textarea name="event_description" class="form-control" id="event_description" placeholder="Enter event description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Event</button>
+        </form>
+    </div>
+</body>
+</html>

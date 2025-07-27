@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.event_name }} - Details</title>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
+
+        .flash-message {
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ event.event_name }}</h1>
+        <p><strong>Date:</strong> {{ event.event_date }}</p>
+        <p><strong>Location:</strong> {{ event.event_location }}</p>
+        <p><strong>Description:</strong> {{ event.event_description }}</p>
+
+        <!-- Flash Messages Section -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message">
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <h2>Budgets</h2>
+        {% if budgets %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for budget in budgets %}
+                        <tr id="budget-{{ budget.id }}">
+                            <td>{{ budget.amount }}</td>
+                            <td>{{ budget.description }}</td>
+                            <td>
+                                <button class="btn-delete delete-budget" data-budget-id="{{ budget.id }}">Delete</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No budgets found for this event.</p>
+        {% endif %}
+        <a href="{{ url_for('add_budget', event_id=event.event_id) }}" class="btn">Add Budget</a>
+
+        <h2>Sponsors</h2>
+        {% if sponsors %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sponsor in sponsors %}
+                        <tr>
+                            <td>{{ sponsor.name }}</td>
+                            <td>{{ sponsor.description }}</td>
+                            <td>
+                                <form action="{{ url_for('delete_sponsor', sponsor_id=sponsor.id) }}" method="POST">
+                                    <button type="submit" class="btn-delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No sponsors found for this event.</p>
+        {% endif %}
+        <a href="{{ url_for('add_sponsor', event_id=event.event_id) }}" class="btn">Add Sponsor</a>
+
+        <h2>Resources</h2>
+        {% if resources %}
+        
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource Name</th>
+                        <th>Resource Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resource in resources %}
+                        <tr>
+                            <td>{{ resource.name }}</td>
+                            <td>{{ resource.type }}</td>
+                            <td>
+                                <form action="{{ url_for('delete_resource', resource_id=resource.id) }}" method="POST">
+                                    <button type="submit" class="btn-delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No resources found for this event.</p>
+        {% endif %}
+        <a href="{{ url_for('add_resource', event_id=event.event_id) }}" class="btn">Add Resource</a>
+
+        <!-- Back to Events Button -->
+        <a href="{{ url_for('events') }}" class="btn" style="background-color: #6c757d; margin-top: 30px;">Back to Events</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.delete-budget').on('click', function(event) {
+            event.preventDefault();
+            
+            const budgetId = $(this).data('budget-id');
+            const eventId = "{{ event.event_id | default('') }}";
+
+            const url = `/event/${eventId}/delete_budget/${budgetId}`;
+
+            if (confirm('Are you sure you want to delete this budget?')) {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    success: function(response) {
+                        $(`#budget-${budgetId}`).remove();
+                        alert('Budget deleted successfully.');
+                    },
+                    error: function(xhr) {
+                        alert('Error deleting budget: ' + xhr.responseJSON.message);
+                    }
+                });
+            }
+        });
+    })
+    </script>
+</body>
+</html>
