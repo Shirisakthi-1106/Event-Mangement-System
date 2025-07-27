@@ -43,9 +43,13 @@ The system enables the admin to:
 
 ## Screenshots
 https://github.com/user-attachments/assets/c0b449ac-b343-404d-8eb7-8766f23d97fb
+
 https://github.com/user-attachments/assets/329a3eee-5102-483c-b117-75d8b6bd08b6
+
 https://github.com/user-attachments/assets/2a8b34f2-438b-42dd-a224-4201cb93db76
+
 https://github.com/user-attachments/assets/b1252e1e-b094-4d73-90e9-823530eadbb1
+
 https://github.com/user-attachments/assets/01df5bda-e98c-45ba-be28-92542dab0dfe
 
 
